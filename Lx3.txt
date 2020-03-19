@@ -1,0 +1,83 @@
+C#企业级开发技术练习3答题卡
+
+班级：计算机信息管理1班     
+姓名：戴丽梅     
+学号：20190307118     
+
+注：请将答案放置在序号下方。*/
+
+（一）
+using System;
+
+namespace _3._1
+{
+    delegate double CalcD(float a, float b, float c);
+    class Program
+    {
+        static double CalcSum(float x, float y, float z)
+        {
+           return x+y+z;
+        }
+        static double CalcMul(float x, float y, float z)
+        {
+           return x*y*z;
+        }
+        static void Main(string[] args)
+        {
+            CalcD cd = CalcSum;
+            cd += CalcMul;
+            Console.WriteLine(cd(5.1f, 2.0f, 0.1f));
+            cd -= CalcMul;
+            Console.WriteLine(cd(5.1f, 2.0f, 0.1f));
+        }
+    }
+}
+
+（二）
+using System;
+using System.Linq;
+namespace _3._2
+{
+    delegate void CalcE(decimal[] a);
+    class Program
+    {
+        static void CaleSum(decimal[] a)
+        {
+            Console.WriteLine($"总和：{a.Sum()}");
+        }
+        static void CaleAvg(decimal[] a)
+        {
+            Console.WriteLine($"平均值：{a.Average()}");
+        }
+        static void Main(string[] args)
+        {
+            Action<decimal[]> ce = CaleSum;
+            ce += CaleAvg;
+            ce(new[] { 1.2M, 8.9M, 2.1M, 9.9M });
+        }
+    }
+}
+
+（三）
+using System;
+
+namespace _3._3
+{
+    class Program
+    {
+        static void CaleJoin(string[] x)
+        {
+            Console.WriteLine(string.Join(",", x));
+        }
+        static void CaleConcat(string[] x)
+        {
+            Console.WriteLine(string.Concat(x));
+        }
+        static void Main(string[] args)
+        {
+            Action<string[]> ac = CaleJoin;
+            ac += CaleConcat;
+            ac(new[] { "\"sql\"", "\"cs\"" });
+        }
+    }
+}
